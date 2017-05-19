@@ -25,7 +25,7 @@ app.on('ready',()=> {
 
 禁用HTTP/2和SPDY/3.1协议。
 
-## --debug =`port`和--debug-brk =`port`
+## --inspect =`port`和--inspect-brk =`port`
 
 调试相关标志,详见[调试主进程][debugging-main-process]        
 

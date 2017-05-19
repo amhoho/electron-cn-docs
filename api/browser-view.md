@@ -37,7 +37,7 @@ view.webContents.loadURL('https://electron.atom.io')
 #### `view.webContents` _实验功能_
 > 属性:**视图的[`WebContents`](web-contents.md)对象**
 
-#### `win.id` _实验功能_
+#### `view.id` _实验功能_
 > 属性:**视图的唯一ID( `Integer`)**
 
 ### 实例方法
@@ -45,19 +45,19 @@ view.webContents.loadURL('https://electron.atom.io')
 使用 `new BrowserWindow` 创建的对象具有以下实例方法:
 
 
-#### `win.setAutoResize(options)` _实验功能_
+#### `view.setAutoResize(options)` _实验功能_
 > 用途:**调整视图大小时设置视图尺寸跟随变化**
 
 * `options` Object
   * `width` Boolean - `true`即视图宽度跟随窗口变化. 默认为 `false`.
   * `height` Boolean - `true`即视图高度跟随窗口变化. 默认为 `false`.
 
-#### `win.setBounds(bounds)` _实验功能_
+#### `view.setBounds(bounds)` _实验功能_
 > 用途:**调整视图大小并将它移动至窗口边界**
 
 * `bounds` [Rectangle](structures/rectangle.md)
 
-#### `win.setBackgroundColor(color)` _实验功能_
+#### `view.setBackgroundColor(color)` _实验功能_
 > 用途:**设置视图的背景颜色**
 
 * `color` String - 颜色值格式如 `#aarrggbb` 或 `#argb`,可选透明度.

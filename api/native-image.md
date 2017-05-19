@@ -121,10 +121,9 @@ console.log(image)
   * `scaleFactor` Double (可选) - 默认1.0.
 
 ### `nativeImage.createFromDataURL(dataURL)`
-> 用途:**从 `dataURL`创建一个 `NativeImage` 实例**
+> 用途:**从 `dataURL`创建一个 `NativeImage` 实例( `NativeImage`)**
 
 * `dataURL` String
-
 
 #### `image.toPNG([options])`
 
