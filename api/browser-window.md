@@ -135,6 +135,10 @@ child.once('ready-to-show',()=> {
 * `hasShadow` Boolean(可选) -窗口是否阴影.仅macOS中有效.  默认值为 `true`.
 * `darkTheme` Boolean(可选) - 强制使用深色dark主题的窗口,只适用于一些GTK + 3桌面环境. 默认值为  `false` .
 * `transparent` Boolean(可选) - 窗口是否透明[transparent](frameless-window.md). 默认值为  `false` .
+* `titleBarStyle` String(可选) - 窗口标题栏的样式.默认值为 `default`.
+    * `default` 标准的灰色不透明的Mac标题栏.
+    * `hidden` 隐藏标题栏,内容充满整个窗口,但它依然在左上角,仍然受标准窗口控制.
+    * `hidden-inset` 主体隐藏,显示小的控制按钮在窗口边缘.
 * `type` String(可选) - 窗口的类型,可选值与效果根据不同系统展示不同效果.
  可选值有:
     * 在Linux上,可选值 `desktop` ,`dock` ,`toolbar` ,`splash`,
@@ -142,10 +146,6 @@ child.once('ready-to-show',()=> {
       * `textured`类型添加金属渐变外观( `NSTexturedBackgroundWindowMask`).
       * `desktop`类型将窗口放置在桌面背景窗口级别( `kCGDesktopWindowLevel  -  1`).注意桌面窗口不会收到焦点,键盘或鼠标事件,但您可以使用 `globalShortcut` 接收输入.
     * 在Windows上,可选值 `toolbar`.
-* `titleBarStyle` String(可选) - 窗口标题栏的样式.默认值为 `default`.
-    * `default` 标准的灰色不透明的Mac标题栏.
-    * `hidden` 隐藏标题栏,内容充满整个窗口,但它依然在左上角,仍然受标准窗口控制.
-    * `hidden-inset` 主体隐藏,显示小的控制按钮在窗口边缘.
 * `thickFrame` Boolean(可选) - 对无框架窗口使用`WS_THICKFRAME'风格. 设置为  `false` 将删除窗口阴影和窗口动画.默认值为 `true`.
 * `vibrancy` String(可选) - 窗口是否使用vibrancy动态效果,仅macOS中有效.可选值有:`appearance-based` ,`light` ,`dark` ,`titlebar` ,`selection`, `menu` ,`popover` ,`sidebar` ,`medium-light`or `ultra-dark`.
 * `zoomToPageWidth` Boolean(可选) - 单击工具栏上的绿色信号灯按钮或单击 窗口>缩放菜单项时的行为,仅macOS中有效.
@@ -155,10 +155,10 @@ child.once('ready-to-show',()=> {
   * `devTools` Boolean(可选) - 是否启用DevTools.
     如果它设置为  `false` ,不能使用`BrowserWindow.webContents.openDevTools()`来打开DevTools. 默认值为 `true`.
   * `nodeIntegration` Boolean(可选) - 是否完整支持node.默认值为 `true`.
-  
   * `nodeIntegrationInWorker`  Boolean(可选) - 是否在Web工作器中启用了Node集成。默认值为  `false`,更多细节详见[多线程](../tutorial/multithreading.md)       
   * `preload` String(可选) - 预载脚本,其它脚本运行之前预先加载指定脚本. 无论页面是否集成Node,此脚本都可以访问所有Node API. 脚本路径为绝对路径.      
-  当 node integration 关闭,预加载的脚本将从全局范围重新引入node的全局引用标志. [这里是例子](process.md#event-loaded).     
+  当 node integration 关闭,预加载的脚本将从全局范围重新引入node的全局引用标志. [这里是例子](process.md#event-loaded).        
+  * `sandbox` Boolean(可选) - 是否启用Chromium操作系统级沙盒.
   * `session`[Session](session.md#class-session) - 设置界面session. 而不是直接忽略session对象 ,也可用 `partition`来代替,它接受一个 partition 字符串. 当同时使用 `session`和 `partition` ,`session`优先级更高.
   默认使用默认 session.
   * `partition`String - 通过session的partition字符串来设置界面session. 如果 `partition`以 `persist:`开头,这个界面将会为所有界面使用相同的 `partition`. 如果没有 `persist:`前缀,界面使用历史session. 通过分享同一个 `partition` ,所有界面使用相同的session. 默认使用默认 session.
@@ -191,10 +191,11 @@ child.once('ready-to-show',()=> {
   * `defaultEncoding` String(可选) - 默认为 `ISO-8859-1`.
   * `backgroundThrottling` Boolean(可选) - 页面变成背景时是否限制动画和计时器.默认为 `true`.
   * `offscreen` Boolean(可选) - 是否绘制和渲染可视区域外的窗口 [更多细节](../tutorial/offscreen-rendering.md),默认为  `false` .
-  * `sandbox` Boolean(可选) - 是否启用Chromium操作系统级沙盒.
+  * `contextIsolation` Boolean (可选) - 是否在独立JavaScript环境中运行Electron API和指定的 `preload`脚本,默认为`false`.该 `preload`脚本仍然可完全访问 `document` 与 `window` 全局变量,但它将使用自身内置函数如( `Array`, `Object`, `JSON`等等.) 并且将被加载的页面与对全局环境所做的任何更改隔离开来. 该选项类同[Chrome Content Scripts][chrome-content-scripts],其目的是确保潜在的不受信任内容在加载时无法篡改 `preload`脚本或Electron API. _试验功能_
+   * `nativeWindowOpen` Boolean (可选) - 是否使用原生默认的 `window.open()`. 默认为 `false`.
+   * `webviewTag` Boolean (可选) - 是否启用 [`<webview>` tag](webview-tag.md)标签. 默认为上文中 `nodeIntegration`设置的值. **注意:** 您应当确保 `<webview>`中远程或不受信任的内容里不会创建恶意的 `preload` 脚本,因为该脚本将会在执行时集成了Node.不过,您可以使用 [webContents](web-contents.md) 中的 `will-attach-webview` 事件对 `preload` 脚本进行剥离并验证或更改 `<webview>`的初始设置.
 
-当使用 `minWidth`/ `maxWidth`/ `minHeight`/ `maxHeight`设置最小或最大窗口大小时,它只限制用户.它不会阻止你传递一个大小不遵循大小约束到 `setBounds`/ `setSize`或 `BrowserWindow`的构造函数.
-
+当使用 `minWidth`/ `maxWidth`/ `minHeight`/ `maxHeight`设置最小或最大窗口大小时,它只限制用户.它不会阻止您将不符合大小限制的大小传递给 `setBounds`/ `setSize`或 `BrowserWindow`的构造函数.
 
 ### 事件列表
  `new BrowserWindow`对象会触发以下事件:
