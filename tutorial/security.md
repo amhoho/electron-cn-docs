@@ -42,5 +42,24 @@
 * WebViews: 不要使用 `disablewebsecurity`
 * WebViews: 不要使用 `allowpopups`
 * WebViews: 不要使用 `insertCSS` 或 `executeJavaScript` 操作远程 CSS/JS.
+* WebViews: 在 `will-attach-webview`事件之前,应验证 `<webview>`所有的选项或参数:
+
+```js
+app.on('web-contents-created', (event, contents) => {
+  contents.on('will-attach-webview', (event, webPreferences, params) => {
+    // 未使用或已验证其位置合法性时剥离预加载脚本
+    delete webPreferences.preload
+    delete webPreferences.preloadURL
+
+    // 禁止集成Node.
+    webPreferences.nodeIntegration = false
+
+    //验证加载中的URL.
+    if (!params.src.startsWith('https://yourapp.com/')) {
+      event.preventDefault()
+    }
+  })
+})
+```
 
 强调一下，这份列表只是将风险降到最低，并不会完全屏蔽风险。 如果您的目的是展示一个网站，浏览器将是一个更安全的选择。

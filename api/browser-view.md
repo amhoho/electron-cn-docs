@@ -20,8 +20,8 @@ win.on('closed', () => {
 })
 
 let view = new BrowserView()
-win.addChildView(view)
-view.setBounds(0, 0, 300, 300)
+win.setBrowserView(view)
+view.setBounds({ x: 0, y: 0, width: 300, height: 300 })
 view.webContents.loadURL('https://electron.atom.io')
 ```
 

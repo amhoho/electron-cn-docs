@@ -193,7 +193,7 @@ child.once('ready-to-show',()=> {
   * `offscreen` Boolean(可选) - 是否绘制和渲染可视区域外的窗口 [更多细节](../tutorial/offscreen-rendering.md),默认为  `false` .
   * `contextIsolation` Boolean (可选) - 是否在独立JavaScript环境中运行Electron API和指定的 `preload`脚本,默认为`false`.该 `preload`脚本仍然可完全访问 `document` 与 `window` 全局变量,但它将使用自身内置函数如( `Array`, `Object`, `JSON`等等.) 并且将被加载的页面与对全局环境所做的任何更改隔离开来. 该选项类同[Chrome Content Scripts][chrome-content-scripts],其目的是确保潜在的不受信任内容在加载时无法篡改 `preload`脚本或Electron API. _试验功能_
    * `nativeWindowOpen` Boolean (可选) - 是否使用原生默认的 `window.open()`. 默认为 `false`.
-   * `webviewTag` Boolean (可选) - 是否启用 [`<webview>` tag](webview-tag.md)标签. 默认为上文中 `nodeIntegration`设置的值. **注意:** 您应当确保 `<webview>`中远程或不受信任的内容里不会创建恶意的 `preload` 脚本,因为该脚本将会在执行时集成了Node.不过,您可以使用 [webContents](web-contents.md) 中的 `will-attach-webview` 事件对 `preload` 脚本进行剥离并验证或更改 `<webview>`的初始设置.
+   * `webviewTag` Boolean (可选) - 是否启用 [`<webview>` tag](webview-tag.md)标签. 默认为上文中 `nodeIntegration`设置的值. **注意:** 您应当确保 `<webview>`中远程或不受信任的内容里不会创建恶意的 `preload` 脚本,因为该脚本将会集成Node.不过,您可以使用 [webContents](web-contents.md) 中的 `will-attach-webview` 事件对 `preload` 脚本进行剥离并验证或更改 `<webview>`的初始设置.
 
 当使用 `minWidth`/ `maxWidth`/ `minHeight`/ `maxHeight`设置最小或最大窗口大小时,它只限制用户.它不会阻止您将不符合大小限制的大小传递给 `setBounds`/ `setSize`或 `BrowserWindow`的构造函数.
 
