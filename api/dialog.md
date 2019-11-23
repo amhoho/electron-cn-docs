@@ -10,7 +10,7 @@ const {dialog} = require('electron')
 console.log(dialog.showOpenDialog({properties: ['openFile', 'openDirectory', 'multiSelections']}))
 ```
 
-对话框默认是在主线程中打开,一下例子展示了如何接收渲染器进程的弹出框对象:
+对话框默认是在主线程中打开,以下例子展示了如何接收渲染器进程的弹出框对象:
 
 ```JavaScript
 const {dialog} = require('electron').remote
