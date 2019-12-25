@@ -95,7 +95,7 @@ _注意_:[quick-start](/quick-start)目录为示范文件,你可以任意修改.
 
 ## Electron学习要点:
 
-1. 由于Electron基于Node.js,对于新手而言,入门第一关应当稍微熟悉[Node.js的文档](https://nodejs.org/dist/latest/docs/doc/api/).            
+1. 由于Electron基于Node.js,对于新手而言,入门第一关应当稍微熟悉[Node.js的文档](https://nodejs.org/dist/latest/docs/api/).            
 
 特别是如os,path等常用模块化的引用,这是非常必要的.
 
