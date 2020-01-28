@@ -1,5 +1,5 @@
 # 专业术语
-> 本文介绍了Electron开发时常用的专业属于.
+> 本文介绍了Electron开发时常用的专业术语.
 
 ### ASAR
 > 含义:**ASAR即Atom Shell 程序包**
